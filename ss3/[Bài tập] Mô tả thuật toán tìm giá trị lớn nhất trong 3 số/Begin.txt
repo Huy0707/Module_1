@@ -1,0 +1,14 @@
+Begin
+	Input = ""
+	Input = ""
+	Input = ""
+	If a > b AND a > c:
+		Display a
+	else:
+	If b > c:
+		Display b
+	else:
+		Display c
+	End if;
+	End if;
+End.		
