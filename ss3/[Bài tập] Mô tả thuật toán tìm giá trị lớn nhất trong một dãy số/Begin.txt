@@ -1,0 +1,19 @@
+Begin
+   Input N
+   i = 1
+   While (i < N+1)
+   Do
+     Input a[i]
+     i = i + 1
+   End D
+   max = a[1]
+   j = 2
+   While (j < N+1)
+   Do
+     If a[j] > max
+	max = a[j]
+     End If
+   End Do
+   Display max
+End 
+   
