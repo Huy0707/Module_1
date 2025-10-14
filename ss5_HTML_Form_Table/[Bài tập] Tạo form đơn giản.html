@@ -1,31 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Table & Form</title>
+    <title>[Bài tập] Tạo form đơn giản</title>
+    <link rel="stylesheet" href="[Bài tập] Tạo form đơn giản.css">
 </head>
 <body>
-    <form action="http://demo.codegym.vn/6/registration_form/register.php" method="post">
-        <label>Họ và tên: </label>
-        <br>
-        <input type="text" name="Name" value="">
-        <br>
-        <label>Email: </label>
-        <br>
-        <input type="email" name="Email" value="">
-        <br>
-        <label>Số điện thoại: </label>
-        <br>
-        <input type="tel" name="Phone" value="">
-        <br>
-        <br>
-        <label>Giới tính: </label>
-        <br>
-        <label><input type="radio" name="Gender" value="M">Nam</label>
-        <label><input type="radio" name="Gender" value="F">Nữ</label>
-        <br>
-        <br>
-        <input type="submit" value="Đăng ký">
-    </form>
+    <div class="container">
+        <h1>SỞ THÍCH CỦA BẠN</h1>
+        <form action="">
+            <table>
+                <tr>
+                    <td><label>Họ và tên: </label></td>
+                    <td colspan="3"><input type="text" name="yourname" id="name"></td>
+                </tr>
+                <tr>
+                    <td><label>Email: </label></td>
+                    <td><input type="text" name="email" id="email"></td>
+                </tr>
+                <tr>
+                    <td><label>Sở thích: </label></td>
+                    <td class="checkbox">
+                        <input type="checkbox" name="hobby" value="Thể thao"> <label>Thể thao</label><br>
+                        <input type="checkbox" name="hobby" value="Lướt web"> <label>Lướt web</label><br>
+                        <input type="checkbox" name="hobby" value="Du lịch"> <label>Du lịch</label>
+                    </td>
+                    <td class="checkbox">
+                        <input type="checkbox" name="hobby" value="Âm nhạc"> <label>Âm nhạc</label><br>
+                        <input type="checkbox" name="hobby" value="Chơi game"> <label>Chơi game</label>
+                    </td>
+                    <td class="checkbox">
+                        <input type="checkbox" name="hobby" value="Đọc sách"> <label>Đọc sách</label><br>
+                        <input type="checkbox" name="hobby" value="Điện ảnh"> <label>Điện ảnh</label>
+                    </td>
+            </table>
+            <div class="button">
+                <input type="submit" name="Submit Form" value="Gửi thông tin">
+                <input type="reset" name="Reset Form" value="Nhập lại">
+            </div>
+        </form>
+    </div>
 </body>
 </html>
