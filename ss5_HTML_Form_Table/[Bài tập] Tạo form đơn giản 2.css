@@ -1,0 +1,50 @@
+body {
+    background-color: white; /* Nền xanh nhạt */
+    font-family: Arial, sans-serif;
+}
+.container {
+    width: 600px;
+    margin: 50px auto;
+    background-color: lightgoldenrodyellow;
+    border: 5px solid #e0ffff;
+    padding: 20px;
+}
+h1 {
+    background-color: lightcyan;
+    color: blue;
+    text-align: left;
+    padding: 5px;
+    margin-top: 0;
+}
+table {
+    width: 100%;
+}
+td {
+    padding: 5px;
+    vertical-align: top;
+}
+td input[type="radio"] {
+    margin-right: 5px;
+}
+label {
+    color: #0000cc;
+    font-weight: bold;
+}
+.button {
+    text-align: center;
+    margin-top: 10px;
+}
+input[type="submit"],
+input[type="reset"] {
+    padding: 5px 15px;
+    margin: 5px;
+    background-color: #dcdcdc;
+    border: 1px solid #888;
+    box-shadow: 2px 2px 2px #999;
+    cursor: pointer;
+}
+input[type="text"],
+input[type="email"] {
+    width: 95%;
+    padding: 5px;
+}
