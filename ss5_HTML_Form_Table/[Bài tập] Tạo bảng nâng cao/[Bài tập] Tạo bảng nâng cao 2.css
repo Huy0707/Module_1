@@ -1,0 +1,74 @@
+table1{
+    background-color: red;
+}
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h2 {
+    color: blue;
+    margin-bottom: 10px;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 600px;
+    font-size: 18px;
+}
+
+th, td {
+    border: 1px solid gray;
+    width: 80px;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.header th {
+    color: white;
+    font-weight: bold;
+    height: 50px;
+}
+
+.header .sun {
+    background-color: red;
+}
+
+.header .weekday {
+    background-color: orange;
+}
+
+.header .sat {
+    background-color: blue;
+}
+
+.header span {
+    display: block;
+    color: #222;
+    font-size: 13px;
+    margin-top: 5px;
+    color: white;
+}
+
+.day {
+    position: relative;
+    font-weight: bold;
+}
+
+.day sup {
+    font-size: 10px;
+    vertical-align: super;
+    position: relative;
+    top: -5px;
+    left: 2px;
+}
+
+.sun {
+    color: red;
+}
+
+.sat {
+    color: blue;
+}
