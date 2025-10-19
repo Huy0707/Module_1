@@ -1,20 +1,422 @@
-Begin
-   Input Diem
-   If Diem >= 75
-      Display "Loại A"
-   Else:
-     If Diem >= 60 AND Diem < 75:
-	Display "Loại B"
-     Else
-	If Diem >= 45 AND Diem < 60:
-	   Display "Loại C"
-	Else
-	   If Diem >= 35 AND Diem < 45:
-	      Display "Loại D"
-	   Else
-	      Display "Loại E"
-	   End If
-	End If
-      End If
-    End If
-End
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lời Chúc 20-10</title>
+    <style>
+        /* --- RESET + BASE --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body {
+            height: 100%;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #f7c1c1, #f7e1e1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #c2185b;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* --- PHẦN MÃ QR --- */
+        #qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1.5s ease;
+            z-index: 30;
+        }
+
+        #qr-section img {
+            width: 200px;
+            height: 200px;
+            border: 4px solid #c2185b;
+            border-radius: 12px;
+            padding: 10px;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #c2185b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 30;
+        }
+
+        button:hover {
+            background-color: #a3154d;
+        }
+
+        /* --- PHẦN CAMERA QUÉT --- */
+        #scan-section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1.5s ease;
+            z-index: 30;
+        }
+
+        #reader {
+            width: 250px;
+            height: 250px;
+            margin-top: 20px;
+            border: 3px dashed #c2185b;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.7);
+        }
+
+        /* --- PHẦN LỜI CHÚC --- */
+        #greeting-section {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+            overflow: hidden;
+        }
+
+        .greeting-header {
+            position: relative;
+            z-index: 40;
+            margin-top: 40px;
+        }
+
+        .greeting-text {
+            font-size: 1.4em;
+            color: #c2185b;
+            line-height: 1.6em;
+            max-width: 700px;
+            background: rgba(255,255,255,0.9);
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.08);
+            margin-top: 20px;
+            animation: slideUp 1s ease;
+            z-index: 40;
+        }
+
+        /* Floating names */
+        .floating-name {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #c2185b;
+            font-weight: 700;
+            pointer-events: none;
+            white-space: nowrap;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+            z-index: 45;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateY(-130vh) scale(1.05); opacity: 0; }
+        }
+
+        /* Background names (phủ nền) */
+        .bg-name {
+            position: absolute;
+            color: rgba(194,24,91,0.08); /* mờ để làm nền */
+            font-weight: 700;
+            pointer-events: none;
+            user-select: none;
+            transform-origin: center;
+            z-index: 20;
+            white-space: nowrap;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8) rotate(0deg); }
+            to { opacity: 1; transform: scale(1) rotate(var(--rot)); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0.02; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(80px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heartFloat {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-800px) scale(0.8); opacity: 0; }
+        }
+
+        .heart {
+            position: fixed;
+            bottom: 0;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: heartFloat 4s linear infinite;
+        }
+
+        /* đảm bảo overlay chữ nền không che nội dung chính */
+        .overlay-center {
+            position: relative;
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<!-- PHẦN 1: MÃ QR -->
+<div id="qr-section">
+    <h1>🌸 Quét mã QR để nhận lời chúc 20/10 🌸</h1>
+    <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?data=loichuc&size=200x200" alt="QR Code">
+    <button id="startBtn">Bắt đầu quét</button>
+</div>
+
+<!-- PHẦN 2: QUÉT MÃ QR -->
+<div id="scan-section">
+    <h1>Đưa mã QR vào khung bên dưới 💗</h1>
+    <div id="reader"></div>
+</div>
+
+<!-- PHẦN 3: LỜI CHÚC -->
+<div id="greeting-section">
+    <div class="overlay-center">
+        <h1 class="greeting-header">💐 Chúc Mừng Ngày 20-10 💐</h1>
+        <div class="greeting-text">
+            Nhân ngày Phụ nữ Việt Nam 20/10,<br>
+            chúc các bạn luôn xinh đẹp, mạnh mẽ và tràn đầy niềm vui!<br>
+            Mọi điều tốt đẹp nhất sẽ luôn đến với các bạn 🌸💖
+        </div>
+    </div>
+    <!-- các tên bay và nền chữ sẽ được JS thêm vào đây -->
+</div>
+
+<!-- JS: QUÉT QR + hiệu ứng tên -->
+<script src="https://unpkg.com/html5-qrcode@2.3.8/minified/html5-qrcode.min.js"></script>
+<script>
+    const qrSection = document.getElementById('qr-section');
+    const scanSection = document.getElementById('scan-section');
+    const greetingSection = document.getElementById('greeting-section');
+    const startBtn = document.getElementById('startBtn');
+    const readerDiv = document.getElementById('reader');
+    const qrImage = document.getElementById('qrImage');
+    let html5QrCode;
+
+    // Thay danh sách này bằng danh sách tên các bạn nữ của bạn
+    const NAMES = [
+        'Hoàng Trần Phúc An',
+        'Ngô Ngọc Bảo Châu',
+        'Nguyễn Quỳnh Chi',
+        'Trần Ngọc Ánh Dương',
+        'Nguyễn Dương Đà Giang',
+        'Đặng Thị Thảo My',
+        'Nguyễn Hoàng Kim Ngân',
+        'Phạm Ngọc Thảo Nguyên',
+        'Phạm Thị Mỹ Tuyền'
+    ];
+
+    // --- QR setup (nếu bạn đã dùng qr hiện tại, có thể giữ nguyên) ---
+    function createShareQr() {
+        const shareUrl = window.location.origin + window.location.pathname + '?q=loichuc';
+        const qrApi = 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(shareUrl) + '&size=200x200';
+        qrImage.src = qrApi;
+        qrImage.alt = 'QR mở ' + shareUrl;
+    }
+
+    // Nếu trang được mở với ?q=loichuc thì hiển thị lời chúc
+    function checkQueryShowGreeting() {
+        const params = new URLSearchParams(window.location.search);
+        if ((params.get('q') || '').trim().toLowerCase() === 'loichuc') {
+            qrSection.style.display = 'none';
+            scanSection.style.display = 'none';
+            showGreeting();
+        }
+    }
+
+    startBtn.addEventListener('click', () => {
+        qrSection.style.display = 'none';
+        scanSection.style.display = 'flex';
+        startScan();
+    });
+
+    // --- html5-qrcode (giữ nguyên) ---
+    function startScan() {
+        html5QrCode = new Html5Qrcode("reader");
+        Html5Qrcode.getCameras().then(devices => {
+            if (devices && devices.length) {
+                html5QrCode.start(
+                    devices[0].id,
+                    { fps: 10, qrbox: 200 },
+                    (decodedText) => {
+                        console.log('decoded:', decodedText);
+                        const text = (decodedText || '').trim().toLowerCase();
+                        if (text === "loichuc" || text === window.location.origin + window.location.pathname + '?q=loichuc') {
+                            html5QrCode.stop().then(() => {
+                                scanSection.style.display = 'none';
+                                showGreeting();
+                            }).catch(err => {
+                                console.warn(err);
+                                scanSection.style.display = 'none';
+                                showGreeting();
+                            });
+                        }
+                    },
+                    (errorMessage) => {}
+                ).catch(err => console.error('Start camera failed:', err));
+            }
+        }).catch(err => console.log('getCameras error:', err));
+    }
+
+    // --- EFFECT: tên bay lên dần và sau đó phủ nền ---
+    function showGreeting() {
+        greetingSection.style.display = 'flex';
+        // Bắt đầu trình diễn tên
+        createFloatingNames(NAMES);
+        // Thêm hearts nếu cần
+        createHearts();
+    }
+
+    function createFloatingNames(names) {
+        // spawn từng tên với khoảng delay
+        names.forEach((name, i) => {
+            setTimeout(() => spawnFloating(name), i * 600);
+        });
+
+        // Sau khi tất cả tên bay xong (khoảng names.length * 600 + extra),
+        // tạo background phủ kín
+        setTimeout(() => {
+            fillBackgroundWithNames(names, 140); // số lượng bg-name, chỉnh nếu cần
+        }, names.length * 600 + 1200);
+    }
+
+    function spawnFloating(name) {
+        const el = document.createElement('div');
+        el.className = 'floating-name';
+        el.textContent = name;
+        // vị trí ngang ngẫu nhiên (giữ trong 8%-92% để không sát lề)
+        const left = 8 + Math.random() * 84;
+        el.style.left = left + 'vw';
+        // font-size ngẫu nhiên cho độ nổi bật
+        el.style.fontSize = (18 + Math.random() * 14) + 'px';
+        // thời gian bay khác nhau
+        const duration = 3 + Math.random() * 3; // 3 - 6s
+        el.style.animation = `floatUp ${duration}s ease-in forwards`;
+        greetingSection.appendChild(el);
+
+        // Khi animation kết thúc, chuyển tên đó thành "phủ nền" nhỏ mờ
+        el.addEventListener('animationend', () => {
+            // tạo một bg-name (tĩnh, mờ) ở vị trí cuối của el
+            createBgName(name, left);
+            // xóa tên bay để tiết kiệm DOM
+            el.remove();
+        });
+    }
+
+    function createBgName(name, leftVw) {
+        const bg = document.createElement('div');
+        bg.className = 'bg-name';
+        bg.textContent = name;
+        // phân bố chiều dọc ngẫu nhiên
+        const top = 8 + Math.random() * 84;
+        bg.style.left = leftVw + (Math.random() * 6 - 3) + 'vw';
+        bg.style.top = top + 'vh';
+        bg.style.fontSize = (10 + Math.random() * 28) + 'px';
+        // xoay nhẹ random
+        const rot = (Math.random() * 40 - 20) + 'deg';
+        bg.style.setProperty('--rot', rot);
+        bg.style.transform = `rotate(${rot})`;
+        bg.style.opacity = (0.06 + Math.random() * 0.12).toString();
+        bg.style.animation = `fadeInScale 0.8s ease forwards`;
+        greetingSection.appendChild(bg);
+    }
+
+    function fillBackgroundWithNames(names, count = 1000) {
+        // Tạo nhiều bg-name rải đều để "phủ kín"
+        for (let i = 0; i < count; i++) {
+            const name = names[Math.floor(Math.random() * names.length)];
+            const bg = document.createElement('div');
+            bg.className = 'bg-name';
+            bg.textContent = name;
+            bg.style.left = Math.random() * 100 + 'vw';
+            bg.style.top = Math.random() * 100 + 'vh';
+            bg.style.fontSize = (8 + Math.random() * 34) + 'px';
+            const rot = (Math.random() * 80 - 40) + 'deg';
+            bg.style.setProperty('--rot', rot + 'deg');
+            bg.style.transform = `rotate(${rot}deg)`;
+            bg.style.opacity = (0.03 + Math.random() * 0.12).toString();
+            // một số sẽ nhẹ di chuyển chậm để tạo động
+            if (Math.random() < 0.15) {
+                // animate subtle float
+                const floatDur = 6 + Math.random() * 8;
+                bg.style.transition = `transform ${floatDur}s ease-in-out`;
+                // slight translateY oscillation by toggling translate after a timeout
+                setTimeout(() => {
+                    bg.style.transform = `translateY(${(Math.random() * 6 - 3)}px) rotate(${rot}deg)`;
+                }, 100 + Math.random() * 1000);
+            }
+            greetingSection.appendChild(bg);
+        }
+
+        // Gradually darken/make nền tên nhiều hơn: tạo thêm một lớp nhẹ sau vài giây
+        setTimeout(() => {
+            for (let j = 0; j < 60; j++) {
+                const name = names[Math.floor(Math.random() * names.length)];
+                const bg = document.createElement('div');
+                bg.className = 'bg-name';
+                bg.textContent = name;
+                bg.style.left = Math.random() * 100 + 'vw';
+                bg.style.top = Math.random() * 100 + 'vh';
+                bg.style.fontSize = (6 + Math.random() * 30) + 'px';
+                const rot = (Math.random() * 80 - 40) + 'deg';
+                bg.style.setProperty('--rot', rot + 'deg');
+                bg.style.transform = `rotate(${rot}deg)`;
+                bg.style.opacity = (0.03 + Math.random() * 0.12).toString();
+                greetingSection.appendChild(bg);
+            }
+        }, 1200);
+    }
+
+    function createHearts() {
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 20 + 10 + "px";
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }, 500);
+    }
+
+    // Khởi tạo QR khi load
+    createShareQr();
+    // Nếu trang mở với ?q=loichuc
+    checkQueryShowGreeting();
+</script>
+</body>
+</html>
