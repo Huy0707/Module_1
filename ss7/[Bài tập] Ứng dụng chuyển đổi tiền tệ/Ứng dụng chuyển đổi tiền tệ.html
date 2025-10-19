@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dụng chuyển đổi tiền tệ</title>
+    <script src="chuyen_doi_tien_te.js"></script>
+</head>
+<body>
+<h1>Chuyển đổi tiền tệ (USD ↔ VND)</h1>
+
+<label for="amount">Nhập số tiền:</label>
+<input type="number" id="amount" placeholder="Nhập số tiền...">
+
+<label for="from">Từ:</label>
+<select id="from">
+    <option value="USD">USD</option>
+    <option value="VND">VND</option>
+</select>
+
+<label for="to">Sang:</label>
+<select id="to">
+    <option value="VND">VND</option>
+    <option value="USD">USD</option>
+</select>
+
+<button onclick="convert()">Convert</button>
+
+<h3 id="result"></h3>
+</body>
+</html>
