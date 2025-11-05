@@ -6,4 +6,4 @@ function factorial(n) {
     }
     return result;
 }
-document.write(parseInt(factorial(prompt(""))));
+document.write(parseInt(factorial(prompt("Nhập một số nguyên dương:"))));
