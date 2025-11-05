@@ -6,4 +6,4 @@ function factorial(n) {
     }
     return result;
 }
-document.write(parseInt(factorial(prompt("")))); // Kết quả: 120
+document.write(parseInt(factorial(prompt(""))));
