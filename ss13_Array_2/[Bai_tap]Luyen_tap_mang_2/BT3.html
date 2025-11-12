@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT3</title>
+</head>
+<body>
+    <script>
+        let chars = ['a', 'b', '1', 'c', '5', 'd', '9', 'z', '0'];
+        let count = 0;
+
+        for (let i = 0; i < chars.length; i++) {
+            if (!isNaN(chars[i]) && chars[i] !== ' ') {
+                count++;
+            }
+        }
+        document.write("Số ký tự là số trong mảng là: " + count);
+    </script>
+</body>
+</html>
