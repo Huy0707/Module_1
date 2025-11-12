@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT3</title>
+</head>
+<body>
+    <script>
+        let numbers=[5,6,12,3,18,20,26,28,29,39,37,49,56];
+        let max = numbers[0];
+        let sum = 0;
+        for (let i =1; i < numbers.length; i++) {
+            if(numbers[i] > max){
+                max = numbers[i];
+            }
+            sum += numbers[i];
+        }
+        let average = Math.floor(sum / numbers.length);
+        document.write("Giá trị lớn nhất trong mảng là: "+ max + "<br>");
+        document.write("Giá trị trung bình của các phần tử trong mảng là:  "+ average);
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT7</title>
+</head>
+<body>
+    <script>
+        let numbers=[1, 3, 5, 7, 11, 13, 17, 19, 23, 27];
+        let V=parseInt(prompt("Enter number"));
+        let index= numbers.indexOf(V);
+        if (index !== -1) {
+            for (let i = index; i < numbers.length - 1; i++) {
+                numbers[i] = numbers[i + 1];
+            }
+            numbers[numbers.length - 1] = 0;
+            alert("Mảng sau khi xóa " + V + ": " + numbers);
+        } else {
+            alert(V + " không có trong mảng");
+        }
+    </script>
+</body>
+</html>

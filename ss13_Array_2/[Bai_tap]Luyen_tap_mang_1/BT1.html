@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT1</title>
+</head>
+<body>
+    <script>
+        let numbers = [];
+        for (let i=0; i<10; i++) {
+            numbers[i]= parseInt(prompt("Nhập phần tử thứ " + (i + 1) + ":"));
+        }
+        let count = 0;
+        for (let i=0; i < numbers.length; i++) {
+            if(numbers[i] >= 10){
+                count++;
+            }
+        }
+        alert("có " + count + " số nguyên lớn hơn hoặc bằng 10 trong mảng: ")
+    </script>
+</body>
+</html>
