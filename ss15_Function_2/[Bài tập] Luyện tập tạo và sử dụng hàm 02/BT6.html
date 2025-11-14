@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra số nguyên dương:</title>
+</head>
+<body>
+<h2>Kiểm tra số nguyên dương</h2>
+<input type="number" id="numPositive" placeholder="Nhập số">
+<button onclick="testPositive()">Kiểm tra</button>
+<script>
+    function isPositiveInteger(n) { return Number.isInteger(n) && n > 0; }
+    function testPositive() {
+        let n = Number(document.getElementById("numPositive").value);
+        alert(isPositiveInteger(n));
+    }
+</script>
+</body>
+</html>

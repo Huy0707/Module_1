@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT3</title>
+</head>
+<body>
+    <input type="number" id="a" placeholder="Nhập số thứ 1">
+    <input type="number" id="b" placeholder="Nhập số thứ 2">
+    <button onclick="compareTwo()">So sánh</button>
+<script>
+    function compare(a, b) {
+        if(a > b) alert("Tham số 1 lớn hơn tham số 2");
+        else return a + b;
+    }
+    function compareTwo() {
+        let x = Number(document.getElementById("a").value);
+        let y = Number(document.getElementById("b").value);
+        let r = compare(x, y);
+        if(r !== undefined) alert("Tổng = " + r);
+    }
+</script>
+</body>
+</html>

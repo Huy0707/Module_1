@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm số nguyên nhỏ nhất:</title>
+</head>
+<body>
+<h2>Tìm số nguyên nhỏ nhất</h2>
+<input type="number" id="aMin" placeholder="Số 1">
+<input type="number" id="bMin" placeholder="Số 2">
+<input type="number" id="cMin" placeholder="Số 3">
+<button onclick="testMin()">Tìm</button>
+<script>
+    function min3(a,b,c) { return Math.min(a,b,c); }
+    function testMin() {
+        let a = Number(document.getElementById("aMin").value);
+        let b = Number(document.getElementById("bMin").value);
+        let c = Number(document.getElementById("cMin").value);
+        alert("Số nhỏ nhất: " + min3(a,b,c));
+    }
+</script>
+</body>
+</html>

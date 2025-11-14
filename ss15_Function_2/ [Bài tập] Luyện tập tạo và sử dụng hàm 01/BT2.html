@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT2</title>
+</head>
+<body>
+<h1>Nhấn nút để tăng giá trị lên 1</h1>
+
+<input type="number" id="inputNumber" placeholder="Nhập số">
+<button onclick="showIncrease()">Tăng lên 1</button>
+
+<script>
+    function increase(num) {
+        return num + 1;
+    }
+
+    function showIncrease() {
+        let value = document.getElementById("inputNumber").value;
+        let result = increase(Number(value));
+        alert("Kết quả sau khi tăng: " + result);
+    }
+</script>
+</body>
+</html>

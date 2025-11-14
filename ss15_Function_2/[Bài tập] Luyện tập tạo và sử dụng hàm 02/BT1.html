@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT1</title>
+</head>
+<body>
+<h1>Tính bình phương</h1>
+<input type="number" id="numSquare" placeholder="Nhập số">
+<button onclick="Square()">Tính bình phương</button>
+<script>
+    function square(n) {
+        return n * n;
+    }
+    function Square() {
+        let n = Number(document.getElementById("numSquare").value);
+        alert("Bình phương: " + square(n));
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra ký tự số:</title>
+</head>
+<body>
+<h1>Kiểm tra ký tự số</h1>
+<input type="text" id="charCheck" maxlength="1" placeholder="Nhập ký tự">
+<button onclick="testIsDigit()">Kiểm tra</button>
+<script>
+    function isDigit(c) { return /\d/.test(c); }
+    function testIsDigit() {
+        let c = document.getElementById("charCheck").value;
+        alert(isDigit(c));
+    }
+</script>
+</body>
+</html>

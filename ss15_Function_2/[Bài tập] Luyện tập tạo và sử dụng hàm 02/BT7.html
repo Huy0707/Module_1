@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đổi chỗ hai số nguyên:</title>
+</head>
+<body>
+<h2>Đổi chỗ hai số</h2>
+<input type="number" id="swapA" placeholder="Số A">
+<input type="number" id="swapB" placeholder="Số B">
+<button onclick="testSwap()">Đổi chỗ</button>
+<script>
+    function swap(a,b) { return [b,a]; }
+    function testSwap() {
+        let a = Number(document.getElementById("swapA").value);
+        let b = Number(document.getElementById("swapB").value);
+        [a,b] = swap(a,b);
+        alert("Sau khi đổi chỗ: A=" + a + ", B=" + b);
+    }
+</script>
+</body>
+</html>

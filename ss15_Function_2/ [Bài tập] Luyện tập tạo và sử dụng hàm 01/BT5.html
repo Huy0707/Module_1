@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BT5</title>
+</head>
+<body>
+<button onclick="findStar()">Nhập tên ngôi sao</button>
+
+<script>
+    let stars = ["Polaris","Aldebaran","Deneb","Vega","Altair","Dubhe","Regulus"];
+    let constellations = ["Ursa Minor","Taurus","Cygnus","Lyra","Aquila","Ursa Major","Leo"];
+    function getConstellation(star) {
+        for(let i=0; i<stars.length; i++){
+            if(stars[i].toLowerCase() === star.toLowerCase()) return constellations[i];
+        }
+        return null;
+    }
+    function findStar() {
+        let starName = prompt("Nhập tên ngôi sao:");
+        let result = getConstellation(starName);
+        if(result) document.write("Chòm sao: " + result);
+        else document.write("Không tìm thấy ngôi sao này.");
+    }
+</script>
+</body>
+</html>

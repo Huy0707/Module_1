@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tiính diện tích và chu vi hình tròn</title>
+</head>
+<body>
+<h1>Diện tích và chu vi hình tròn</h1>
+<input type="number" id="radius" placeholder="Nhập bán kính">
+<button onclick="testCircle()">Tính</button>
+<script>
+    function S_Circle(r) { return Math.PI * r * r; }
+    function ChuViCircle(r) { return 2 * Math.PI * r; }
+
+    function testCircle() {
+        let r = Number(document.getElementById("radius").value);
+        alert("Diện tích: " + S_Circle(r).toFixed(2) + ", Chu vi: " + ChuViCircle(r).toFixed(2));
+    }
+</script>
+</body>
+</html>

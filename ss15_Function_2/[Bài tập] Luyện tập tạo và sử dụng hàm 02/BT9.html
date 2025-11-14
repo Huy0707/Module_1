@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kiểm tra ký tự trong mảng:</title>
+</head>
+<body>
+<h2>Kiểm tra ký tự trong mảng</h2>
+<input type="text" id="arrayChar" placeholder="Nhập các ký tự cách nhau dấu phẩy">
+<input type="text" id="charSearch" maxlength="1" placeholder="Ký tự cần tìm">
+<button onclick="testCharInArray()">Kiểm tra</button>
+<script>
+    function countChar(arr,c) {
+        let count = 0;
+        for(let x of arr) if(x === c) count++;
+        return count>0 ? count : -1;
+    }
+    function testCharInArray() {
+        let arr = document.getElementById("arrayChar").value.split(',');
+        let c = document.getElementById("charSearch").value;
+        alert("Số lần xuất hiện: " + countChar(arr,c));
+    }
+</script>
+</body>
+</html>

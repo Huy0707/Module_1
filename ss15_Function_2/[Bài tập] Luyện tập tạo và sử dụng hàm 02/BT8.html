@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Đảo ngược mảng:</title>
+</head>
+<body>
+<h2>Đảo ngược mảng số</h2>
+<input type="text" id="arrayInput" placeholder="Nhập các số cách nhau dấu phẩy">
+<button onclick="testReverseArray()">Đảo ngược</button>
+<script>
+    function reverseArray(arr) { return arr.reverse(); }
+    function testReverseArray() {
+        let arr = document.getElementById("arrayInput").value.split(',').map(Number);
+        alert("Mảng đảo ngược: " + reverseArray(arr));
+    }
+</script>
+</body>
+</html>
